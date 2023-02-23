@@ -13,7 +13,8 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Favorites"),
+        title: Text(
+            "${BlocProvider.of<FavoritesBloc>(context).favoriteItems.length.toString()} Favorites"),
       ),
       body: _favoriteBody(),
     );
