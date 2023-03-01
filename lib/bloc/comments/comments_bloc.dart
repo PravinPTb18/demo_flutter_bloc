@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Comments bloc calls to handle events and set state for the comments
 class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
-  // Here we create the instance of comments api provider so we can
+  // Here we create the instance of comments api provider so we can use
   // api methods easily
   final CommentsApiProvider _commentsRepo;
 
