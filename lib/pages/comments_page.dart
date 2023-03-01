@@ -20,39 +20,41 @@ class CommentsPage extends StatefulWidget {
 class _CommentsPageState extends State<CommentsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Comments"),
-        actions: [
-          // Displaying the number favorites available
-          // using bloc builder
-          if (context.watch<FavoritesBloc>().favoriteItems.isNotEmpty)
-            Text(
-                BlocProvider.of<FavoritesBloc>(context)
-                    .favoriteItems
-                    .length
-                    .toString(),
-                style: const TextStyle(
+    return BlocBuilder<CommentsBloc, CommentsState>(builder: (context, state) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text("Comments"),
+          actions: [
+            // Displaying the number favorites available
+            // using bloc builder
+            if (context.watch<FavoritesBloc>().favoriteItems.isNotEmpty)
+              Text(
+                  BlocProvider.of<FavoritesBloc>(context)
+                      .favoriteItems
+                      .length
+                      .toString(),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20)),
+            // Displaying the favorites icon to navigate to favorites screen
+            if (context.watch<FavoritesBloc>().favoriteItems.isNotEmpty)
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (_) => const FavoritesPage()));
+                  },
+                  icon: const Icon(
+                    Icons.favorite,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20)),
-          // Displaying the favorites icon to navigate to favorites screen
-          if (context.watch<FavoritesBloc>().favoriteItems.isNotEmpty)
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                          builder: (_) => const FavoritesPage()));
-                },
-                icon: const Icon(
-                  Icons.favorite,
-                  color: Colors.white,
-                )),
-        ],
-      ),
-      body: _commentsBody(),
-    );
+                  )),
+          ],
+        ),
+        body: _commentsBody(),
+      );
+    });
   }
 
   // A widget which displays the list of comments with favorite icon button
